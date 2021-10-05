@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  app:
+    container_name: rutificador
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    environment: 
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/rutificador
+  db:
+    container_name: postgres
+    image: postgres
+    restart: always
+    volumes:
+      - /path/to/postgresql-persistence:/bitnami/postgresql
+      - ./sql:/docker-entrypoint-initdb.d
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=rutificador
+    ports:
+      - "6432:5432"
+    
