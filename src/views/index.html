@@ -9,7 +9,7 @@
   <meta property="og:description" content="API Restful para consultar datos por rut o nombre">
   <meta property="og:image" content="../img/rut.png">
   <meta property="og:type" content="Website">
-  
+
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
@@ -99,7 +99,7 @@
       Las peticiones que se realicen a la API se realizan a traves de la siguiente url:
 
 
-      <p class="note note-primary"><strong>https://api.rutificador.cl/api/v1/</strong></p>
+      <p class="note note-primary"><strong>https://api-rutificador.herokuapp.com/api/v1/</strong></p>
 
 
 
@@ -115,7 +115,7 @@
       <h6 class="my-3">HTTP Request</h6>
 
       <p class="note note-primary">
-        <strong>GET</strong> https://api.rutificador.cl/api/v1/persona/rut/{rut}
+        <strong>GET</strong> https://api-rutificador.herokuapp.com/api/v1/persona/rut/{rut}
       </p>
 
       <h6>Query Parameters</h6>
@@ -166,7 +166,7 @@
         <h6 class="my-3">HTTP Request</h6>
 
         <p class="note note-primary">
-          <strong>GET</strong> https://api.rutificador.cl/api/v1/persona/buscar/{nombre}
+          <strong>GET</strong> https://api-rutificador.herokuapp.com/api/v1/persona/buscar/{nombre}
         </p>
 
         <h6>Query Parameters</h6>
@@ -337,7 +337,7 @@
     buttonRut.addEventListener('click', function (e) {
       e.preventDefault();
       let rut = document.querySelector('#rut').value;
-      let url = 'http://127.0.0.1:3000/api/v1/persona/rut/' + rut;
+      let url = 'https://api-rutificador.herokuapp.com/api/v1/persona/rut/' + rut;
       fetch(url, {
         method: 'GET',
         headers: {
@@ -357,7 +357,7 @@
     buttonNombre.addEventListener('click', function (e) {
       e.preventDefault();
       let nombre = document.querySelector('#nombre').value;
-      let url = 'http://127.0.0.1:3000/api/v1/persona/buscar/' + nombre;
+      let url = 'https://api-rutificador.herokuapp.com/api/v1/persona/buscar/' + nombre;
       fetch(url, {
         method: 'GET',
         headers: {
