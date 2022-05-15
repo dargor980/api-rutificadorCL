@@ -1,7 +1,6 @@
 const request = require('request-promise');
 const cheerio = require('cheerio');
-const { Querystring } = require('request/lib/querystring');
-
+const path = require('path');
 
 
 const getPerson = async (req, res) => {
@@ -84,7 +83,13 @@ const getPersonByName = async (req, res) => {
     }
 }
 
+const getImg = async (req, res) => {
+    var dir = path.parse(__dirname);
+    res.sendFile(dir.dir + `/src/img/${req.params.img}`);
+}
+
 module.exports = {
     getPerson,
     getPersonByName,
+    getImg
 }
