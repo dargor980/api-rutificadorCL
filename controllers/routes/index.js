@@ -3,11 +3,10 @@ const express = require('express');
 const app = express();
 const router = Router();
 
-const { getPerson, getPersonByName, savePerson } = require('../indexController');
+const { getPerson, getPersonByName } = require('../indexController');
 
-router.get('/rut/:rut', getPerson);
-router.get('/buscar/:nombre', getPersonByName);
-router.get('/rut/:rut/guardar', savePerson);
+router.get('/api/v1/persona/rut/:rut', getPerson);
+router.get('/api/v1/persona/buscar/:nombre', getPersonByName);
 app.use('/', router);
 
 module.exports = app;

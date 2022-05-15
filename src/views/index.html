@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="API Rutificador Chileno">
+  <meta property="og:description" content="API Restful para consultar datos por rut o nombre">
+  <meta property="og:image" content="../img/rut.png">
+  <meta property="og:type" content="Website">
+  
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
+  <title>API Rutificador Chileno </title>
+</head>
+
+<body>
+  <header>
+    <!-- Intro settings -->
+    <style>
+      /* Default height for small devices */
+      #intro-example {
+        height: 400px;
+      }
+
+      /* Height for devices larger than 992px */
+      @media (min-width: 992px) {
+        #intro-example {
+          height: 600px;
+        }
+      }
+    </style>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" aria-current="page" href="#">Rutificador</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#documentacion" id="">Documentación</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#prueba">Prueba</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contacto</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+
+    <!-- Background image -->
+    <div id="intro-example" class="p-5 text-center bg-image"
+      style="background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');">
+      <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+        <div class="d-flex justify-content-center align-items-center h-100">
+          <div class="text-white">
+            <h1 class="mb-3 display-1">API Rutificador Chileno</h1>
+            <h5 class="mb-4 display-6">Busca personas con su rut o nombre e impleméntalo en tu app</h5>
+            <a class="btn btn-outline-light btn-lg m-2" href="https://github.com/dargor980" role="button"
+              rel="nofollow" target="_blank">Comenzar</a>
+            <a class="btn btn-outline-light btn-lg m-2" href="#documentacion" 
+              role="button">ver Documentación</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Background image -->
+  </header>
+
+
+  <div class="container my-3">
+    <h2 class="my-3">Descripción</h1>
+      <hr>
+      <p>Pequeño servicio REST que nos permite obtener los datos de una persona buscando
+        a través de su nombre o rut. Obtiene los datos directamente del sitio <a
+          href="https://rutificador.org">rutificador.org</a>
+      </p>
+
+      <h2 class="my-3" id="documentacion">Documentación</h2>
+      <hr>
+
+      <h3 class="my-3">API Host</h3>
+      Las peticiones que se realicen a la API se realizan a traves de la siguiente url:
+
+
+      <p class="note note-primary"><strong>https://api.rutificador.cl/api/v1/</strong></p>
+
+
+
+
+
+
+      <h3 class="my-4">Métodos de la API</h3>
+      <hr>
+
+      <h4 class="my-3">Obtener persona por RUT</h4>
+      <p class="my-3">Obtiene los datos de una persona por rut</p>
+
+      <h6 class="my-3">HTTP Request</h6>
+
+      <p class="note note-primary">
+        <strong>GET</strong> https://api.rutificador.cl/api/v1/persona/rut/{rut}
+      </p>
+
+      <h6>Query Parameters</h6>
+      <div class="container row">
+        <div class="col-md-4">
+          <div class="card">
+
+            <table class="table table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Parameter</th>
+                  <th scope="col">Description</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">rut</th>
+                  <td><strong>string</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <h6 class="my-3">Response: JSON</h6>
+      <h6 class="my-3">Status code: 200</p>
+
+        <div class="col-md-6">
+          <pre class="prettyprint">
+                    <code>
+{
+    "Nombre":"Contreras Amestica German Brandon",
+    "RUT":"20.046.091-K",
+    "Sexo":"VAR",
+    "Direccion":"Luis Matte Larrain 1680 Villa La Foresta",
+    "Ciudad":"Puente Alto"
+}
+                    </code>
+                </pre>
+        </div>
+
+        <h4 class="my-3">Obtener persona por Nombre</h4>
+        <p class="my-3">Obtiene los datos de una persona por nombre. Puede retornar un listado de peronsas que coincidan
+          con el nombre</p>
+
+        <h6 class="my-3">HTTP Request</h6>
+
+        <p class="note note-primary">
+          <strong>GET</strong> https://api.rutificador.cl/api/v1/persona/buscar/{nombre}
+        </p>
+
+        <h6>Query Parameters</h6>
+        <div class="container row">
+          <div class="col-md-4">
+            <div class="card">
+
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th scope="col">Parameter</th>
+                    <th scope="col">Description</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">nombre</th>
+                    <td><strong>string</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <h6 class="my-3">Response: JSON</h6>
+        <h6 class="my-3">Status code: 200</p>
+
+          <div class="col-md-6">
+            <pre class="prettyprint">
+                    <code>
+{
+    "Nombre":"Contreras Amestica German Brandon",
+    "RUT":"20.046.091-K",
+    "Sexo":"VAR",
+    "Direccion":"Luis Matte Larrain 1680 Villa La Foresta",
+    "Ciudad":"Puente Alto"
+}
+                    </code>
+                </pre>
+          </div>
+
+
+          <hr>
+          <h2 class="my-3 display-4 text-center" id="prueba">Pruébalo tu mismo</h2>
+          <hr>
+          <h6 class="text-center">Puedes realizar una prueba aquí mismo:</p>
+            <div class="row">
+              <div class="col-md-4"></div>
+              <div class="col-md-4">
+                <!-- Pills navs -->
+                <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="tab-rut" data-mdb-toggle="pill" href="#pills-rut" role="tab"
+                      aria-controls="pills-rut" aria-selected="true">RUT</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="tab-nombre" data-mdb-toggle="pill" href="#pills-nombre" role="tab"
+                      aria-controls="pills-nombre" aria-selected="false">Nombre</a>
+                  </li>
+                </ul>
+                <!-- Pills navs -->
+
+                <!-- Pills content -->
+                <div class="tab-content">
+                  <div class="tab-pane fade show active" id="pills-rut" role="tabpanel" aria-labelledby="tab-rut">
+                    <form>
+                      <div class="text-center mb-3">
+                        <p>Busca usando el rut:</p>
+
+                      </div>
+
+                      <!-- RUT input -->
+                      <div class="form-outline mb-4">
+                        <input type="text" id="rut" class="form-control" />
+                        <label class="form-label" for="rut">RUT</label>
+                      </div>
+
+
+                      <!-- Submit button -->
+                      <button type="submit" class="btn btn-primary btn-block mb-4" id="btnRut">Buscar</button>
+                    </form>
+                  </div>
+                  <div class="tab-pane fade" id="pills-nombre" role="tabpanel" aria-labelledby="tab-nombre">
+                    <form>
+                      <div class="text-center mb-3">
+                        <p>Busca usando el Nombre:</p>
+
+                      </div>
+
+                      <!-- Nombre input -->
+                      <div class="form-outline mb-4">
+                        <input type="text" id="nombre" class="form-control" />
+                        <label class="form-label" for="nombre">Name</label>
+                      </div>
+
+                      <!-- Submit button -->
+                      <button type="submit" class="btn btn-primary btn-block mb-3" id="btnNombre">Buscar</button>
+                    </form>
+                  </div>
+                </div>
+                <!-- Pills content -->
+              </div>
+            </div>
+
+
+
+
+
+  </div>
+
+  <div id="container-persona">
+
+  </div>
+
+  <template id="template-persona">
+    <h3 class="text-center">Resultados de la búsqueda</h3>
+    <div class="row">
+      <div class="col-xs-12 col-md-4 my-3"></div>
+      <div class="col-xs-12 col-md-4 my-3">
+        <pre class="prettyprint">
+              <code>
+              </code>
+            </pre>
+      </div>
+    </div>
+  </template>
+
+
+  <!-- Footer -->
+  <footer class="bg-dark text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+
+        <!-- Linkedin -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+
+        <!-- Github -->
+        <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/dargor980" role="button"><i
+            class="fab fa-github"></i></a>
+      </section>
+      <!-- Section: Social media -->
+
+
+
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2021 Copyright:
+      <a class="text-white" href="https://germancontreras.prismasoftware.cl">Germán Contreras Améstica</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
+
+
+  <script>
+
+    let buttonRut = document.querySelector('#btnRut');
+    let datos = [];
+    buttonRut.addEventListener('click', function (e) {
+      e.preventDefault();
+      let rut = document.querySelector('#rut').value;
+      let url = 'http://127.0.0.1:3000/api/v1/persona/rut/' + rut;
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          drawPerson(data);
+        })
+        .catch(err => console.log(err));
+    });
+
+    let buttonNombre = document.querySelector('#btnNombre');
+    buttonNombre.addEventListener('click', function (e) {
+      e.preventDefault();
+      let nombre = document.querySelector('#nombre').value;
+      let url = 'http://127.0.0.1:3000/api/v1/persona/buscar/' + nombre;
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          drawPersonByName(data);
+        })
+        .catch(err => console.log(err));
+
+    })
+
+
+    const containerPersona = document.querySelector('#container-persona');
+
+    const drawPerson = (data) => {
+      containerPersona.innerHTML = "";
+      let template = document.querySelector('#template-persona').content;
+      let fragment = document.createDocumentFragment();
+      template.querySelector('pre code').innerHTML = `\n{\n    "Nombre": ${data.Nombre},\n    "RUT": ${data.RUT},\n    "Sexo": ${data.Sexo},\n    "Direccion": ${data.Direccion},\n    "Ciudad": ${data.Ciudad}\n}`;
+
+
+      const copy = template.cloneNode(true);
+      fragment.appendChild(copy);
+      containerPersona.appendChild(fragment);
+    }
+
+    const drawPersonByName = (data) => {
+      containerPersona.innerHTML = "";
+      let template = document.querySelector('#template-persona').content;
+      let fragment = document.createDocumentFragment();
+      template.querySelector('pre code').innerHTML = JSON.stringify(data, null, 2);
+
+      const copy = template.cloneNode(true);
+      fragment.appendChild(copy);
+      containerPersona.appendChild(fragment);
+
+    }
+  </script>
+
+</body>
+
+</html>
