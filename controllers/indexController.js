@@ -1,6 +1,7 @@
 const request = require('request-promise');
 const cheerio = require('cheerio');
 const path = require('path');
+const logger = require('../utils/logger');
 
 
 const getPerson = async (req, res) => {
@@ -37,7 +38,8 @@ const getPerson = async (req, res) => {
        
         
         res.status(200).json(data[0]);
-    } catch {
+    } catch(err) {
+        logger.error(`[GET] /api/v1/persona/rut [400] Error al encontrar el rut \n [Stacktrace] \n ${err.stack}`);
         res.status(404).json({
             message: 'Not Found'
         });
@@ -67,8 +69,8 @@ const getPersonByName = async (req, res) => {
             if($($(element).find("td")[0]).text() == "")
                 return
             var Persona = {
-                RUT: $($(element).find("td")[1]).text(),
-                Nombre: $($(element).find("td")[0]).text(),
+                RUT: $($(element).find("td")[0]).text(),
+                Nombre: $($(element).find("td")[1]).text(),
                 Sexo: $($(element).find("td")[2]).text(),
                 Direccion: $($(element).find("td")[3]).text(),
                 Ciudad: $($(element).find("td")[4]).text()
@@ -76,7 +78,8 @@ const getPersonByName = async (req, res) => {
             data.push(Persona);
         });
         res.status(200).json(data);
-    } catch {
+    } catch(err) {
+        logger.error('[GET] /api/v1/persona/buscar/ [500] Error al encontrar persona por nombre. \n [Stacktrace] \n ${err.stack}')
         res.status(500).json({
             message: 'Internal Server Error'
         });

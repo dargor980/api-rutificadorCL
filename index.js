@@ -1,16 +1,15 @@
 const express = require('express');
-const request = require('request-promise');
 const cors = require('cors');
 const { json, application } = require('express');
-const fs = require('fs');
 const app = express();
 const port = process.env.PORT || 3000;
+const logger = require('./utils/logger');
 
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors());
-app.use(require('./controllers/routes/index'));
+app.use(require('./routes/index'));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -22,7 +21,7 @@ app.use((req, res, next) => {
 });
 
 app.listen(port, () =>{
-    console.log(`Server iniciado en el puerto ${port}`);
+    logger.info(`Server running on port ${port}`);
 });
 
 app.get("/", (req,res) => {
